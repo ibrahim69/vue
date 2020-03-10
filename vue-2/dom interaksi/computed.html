@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Computed</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="myApp">
+        <button type="button" @click="counter++">Increase</button>
+        <button type="button" @click="counter--">Decrease</button>
+        <button type="button" @click="secondCounter++">Secound Counter</button>
+
+        <p> Counter: {{ counter }} | {{ secondCounter }} </p>
+        <p> Result: {{ result() }} | {{ output }} </p>
+    </div>
+
+    <script>
+        new Vue({
+            el: "#myApp",
+            data: {
+                counter: 0,
+                secondCounter: 0
+            },
+            // semua yg disimpan di dalam 'computed' penggunaannya sama dengan menggunakan 'data'
+            computed: {
+                output: function() {
+                    console.log('Computed');
+                    return this.counter > 5 ? 'Greater than 5' : 'Smaller than 5'
+                }
+            },
+            watch: {
+                counter: function(value) {
+                    var vm = this;
+                    setTimeout(function(){ 
+                        vm.counter = 0
+                    }, 2000)
+                }
+            },
+            methods: {
+                result: function() {
+                    console.log('Methods')
+                    return this.counter > 5 ? 'Greater than 5' : 'Smaller than 5'
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

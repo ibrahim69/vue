@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Belajar Vue Pemula</title>
+
+    <style>
+
+        .btn {
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 35px;
+            display: block;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <div id="myApp">
+
+        <h1> Login </h1>
+        <div v-if="preview">
+            Logged In
+            <a @click="login" class="btn">Login</a>
+        </div>
+        <div v-else>
+            Logged Out
+            <a @click="login" class="btn">Login</a>
+        </div>
+
+        <pre> {{ $data | json }} </pre>
+
+    </div>
+    
+
+    <!-- vue -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js"></script>
+
+    <script>
+        var vm = new Vue ({
+            el: "#myApp",
+            data: {
+                preview: false
+            }, methods: {
+                login : function() {
+                    this.preview ^= true;
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

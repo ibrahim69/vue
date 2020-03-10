@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Belajar Vue Pemula</title>
+
+    <style>
+
+        .btn {
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 35px;
+            display: block;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <div id="myApp">
+        <mycar :make="make" :model="model" :message="message" :count="count"></mycar>
+        <mycar :make="make" :model="model" :message="message" :count="count"></mycar>
+        <mycar :make="make" :model="model" :message="message" :count="count"></mycar>
+        <pre> {{ $data | json }} </pre>
+    </div>
+
+    <template id="car-template">
+        <h1> {{ make }} </h1>
+        <h4> {{ model }} </h4>
+        <div> Hello World {{ message }} </div>
+        <div>count : {{ count   }} </div>
+        <button type="button" @click="addValue" class="btn">Vote for me</button>
+    </template>
+    
+
+    <!-- vue -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js"></script>
+
+    <script>
+
+        Vue.component('mycar', {
+            template:  '#car-template',
+            props: [ 'make', 'model', 'message', 'count'],
+            methods: {
+                addValue: function(event) {
+                    // console.log(event)
+                    this.count++;
+                }
+            }
+        })
+
+        var vm = new Vue ({
+            el: "#myApp",
+            data: {
+                make: 'ford',
+                model: "mustang",
+                message: 'Buy this car',
+                count: 0
+            }
+        })
+    </script>
+    
+</body>
+</html>

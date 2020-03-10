@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> v-for </title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="myApp">
+        <ul>
+            <li v-for="(item, index) in items" v-bind::key="item">
+                {{ index }}, {{ item }}
+            </li>
+        </ul>
+
+        <button @click="items.push('spices')">Add New</button>
+
+        <hr>
+
+        <ul>
+            <li v-for="person in persons">
+                <span v-for="(value, key) in person">
+                    {{ key }} :
+                    {{ value }}
+                </span>
+            </li>
+        </ul>
+
+        <hr>
+
+        <template v-for="(item, index) in items">
+            <h1>
+                {{item}}
+            </h1>
+
+            <p>
+                {{ index }}
+            </p>
+        </template>
+    </div>
+
+    <div id="exercise-5">
+
+        <!-- 1) Hook up the button to toggle the display of the two paragraphs. Use both v-if and v-show and inspect the elements to see the difference -->
+        <div>
+            <button @click="show = !show">Toggle</button>
+            <p v-if="show">You either see me ...</p>
+            <p v-else>...or me</p>
+            <p v-show="show">You either see me ...</p>
+            <p v-show="!show">...or me</p>
+        </div>
+
+        <!-- 
+            v-if make element dissapear when inspected
+            v-show make element add style display none
+        -->
+
+        <hr>
+
+        <!-- 2) Output an <ul> of array elements of your choice. Also print the index of each element. -->
+        <ul>
+            <li v-for="(array, index) in arrays">
+                {{ array }}, {{ index }}
+            </li>
+        </ul>
+
+        <hr>
+
+        <!-- 3) Print all key-value pairs of the following object: {title: 'Lord of the Rings', author: 'J.R.R. Tolkiens', books: '3'}. Also print the index of each item. -->
+        <ul>
+            <li v-for="object in myObject">
+                <div v-for="(index, object, key) in myObject">
+                    {{ object }} : {{ index }}, ({{key}})
+                </div>
+            </li>
+        </ul>
+
+        <hr>
+
+        <!-- 4) Print the following object (only the values) and also create a nested loop for the array: {name: 'TESTOBJECT', data: [1.67, 1.33, 0.98, 2.21]} (hint: use v-for and v-if to achieve this) -->
+        <ul>
+            <li v-for="value in testData">
+                <template v-if="Array.isArray(value)">
+                    <hr style="border-color: blueviolet;">
+                    <div v-for="element in value">
+                        {{ element }}
+                    </div>
+                </template>
+                <template v-else>
+                    <div>
+                        {{ value }}
+                    </div>
+                </template>
+            </li>
+        </ul>
+    </div>
+      
+
+    <script>
+        new Vue({
+            el: "#myApp",
+            data: {
+                items: ['meat', 'fruit', 'cookies'],
+                persons: [
+                    {name: 'Max', age: 27, color: 'red'},
+                    {name: 'Anna', age: 32, color: 'blue'}
+                ]
+            }
+        })
+    </script>
+    
+    <script src="assets/js/exercise-5.js"></script>
+</body>
+</html>

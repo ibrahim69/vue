@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Component </title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <my-app></my-app>
+        <hr>
+        <my-app></my-app>
+        <hr>
+        <my-app-2></my-app-2>
+        <hr>
+        <my-app-2></my-app-2>
+    </div>
+
+    <div id="app2">
+        <my-app-2></my-app-2>
+        <hr>
+        <my-app-2></my-app-2>
+    </div>
+    
+
+    <script>
+        // Component can reasued in many page
+        // Global Component
+        Vue.component('my-app',{
+            // data must be a function https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function
+            data: function() {
+                return {
+                    status: 'Critical'
+                }
+                
+            },
+            template: '<p> <strong>Global Declaration Component</strong>  Server Status: {{ status }} <button @click="change">Change Status</button> </p>',
+            methods: {
+                change: function() {
+                    this.status = 'change'
+                }
+            }
+        })
+
+        new Vue({
+            el: '#app'
+        })
+
+        //  Local Declaration Component
+        var cmp2 = {
+            // data must be a function https://vuejs.org/v2/guide/components.html#data-Must-Be-a-Function
+            data: function() {
+                return {
+                    status: 'Critical'
+                }
+                
+            },
+            template: '<p> <strong>Local Declaration Component</strong>   Server Status: {{ status }} <button @click="change">Change Status</button> </p>',
+            methods: {
+                change: function() {
+                    this.status = 'change'
+                }
+            }
+        }
+
+        new Vue ({
+            el: '#app2',
+            components: {
+                'my-app-2' : cmp2
+            }
+        })
+    </script>
+
+    <!-- <script>
+        const app = document.getElementById('app')
+
+        const logo = document.createElement('img')
+        logo.src = 'logo.png'
+
+        const container = document.createElement('div')
+        container.setAttribute('class', 'container')
+
+        app.appendChild(logo)
+        app.appendChild(container)
+
+        var request = new XMLHttpRequest()
+        request.open('GET', 'https://ghibliapi.herokuapp.com/films', true)
+        request.onload = function() {
+            // Begin accessing JSON data here
+            var data = JSON.parse(this.response)
+            if (request.status >= 200 && request.status < 400) {
+                data.forEach(movie => {
+                const card = document.createElement('div')
+                card.setAttribute('class', 'card')
+
+                const h1 = document.createElement('h1')
+                h1.textContent = movie.title
+
+                const p = document.createElement('p')
+                movie.description = movie.description.substring(0, 300)
+                p.textContent = `${movie.description}...`
+
+                container.appendChild(card)
+                card.appendChild(h1)
+                card.appendChild(p)
+                })
+            } else {
+                const errorMessage = document.createElement('marquee')
+                errorMessage.textContent = `Gah, it's not working!`
+                app.appendChild(errorMessage)
+            }
+        }
+
+        request.send()
+    </script> -->
+
+</body>
+</html>

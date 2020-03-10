@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Belajar Vue Pemula</title>
+
+    <style>
+
+        .btn {
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 35px;
+            display: block;
+        }
+
+        img {
+            display: block;
+        }
+
+        #newdiv {
+            height: 200px;
+            width: 200px;
+            background-color: aqua;
+        }
+
+        .transition-transition {
+            transition: all .15s ease;
+            height: 20px;
+            background-color: yellow;
+        }
+
+        .transition-enter, .transition-leave {
+            height: 0;
+            opacity: 0;
+            background-color: green;
+        }
+    </style>
+
+
+</head>
+<body>
+
+    <div id="myApp">
+
+        <h1> Searching for {{ searchme }} </h1>
+        <!-- <img v-bind:src="imgPath" alt="">
+        <img :src="imgPath" alt=""> -->
+        <input type="text" v-model="searchme">
+        <div v-for="index in items | filterBy searchme"> 
+                {{ index.todo }} 
+        </div>
+        <a @click="toggleData" class="btn">Click me</a>
+    
+        <pre> {{ $data | json }} </pre>
+
+        <div v-if="preview" id="newdiv" transition="transition">some content</div>
+
+    </div>
+    
+
+    <!-- vue -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.25/vue.min.js"></script>
+
+    <script>
+        var vm = new Vue ({
+            el: "#myApp",
+            data: {
+                searchme: "",
+                imgPath: "../../work/olympic/assets/images/ads.jpeg",
+                preview: false,
+                items: [
+                    {
+                        todo: "create website"
+                    },
+                    {
+                        todo: "promote website"
+                    },
+                    {
+                        todo: "upload content"
+                    }
+                ]
+            }, methods: {
+                toggleData : function() {
+                    this.preview ^= true
+                }
+            }
+        })
+    </script>
+    
+</body>
+</html>

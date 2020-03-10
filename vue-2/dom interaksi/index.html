@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 2</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+        <input type="text" v-on:input="changeTitle">
+        <h1 v-once> {{ title }} </h1>
+        <p> 
+            {{ sayHello() }} 
+            <a v-bind:href="link">Google</a>
+        </p>
+
+        <hr>
+
+        <p v-html="finishedLink"></p>
+    </div>
+
+    <div id="exercise">
+        <!-- 1) Fill the <p> below with your Name and Age - using Interpolation -->
+        <p>VueJS is pretty cool - {{ YOUR_NAME }} ( {{ AGE }} )</p>
+        <!-- 2) Output your age, multiplied by 3 -->
+        <p> {{ multiply() }} </p>
+        <!-- 3) Call a function to output a random float between 0 and 1 (Math.random()) -->
+        <p>
+            {{ mathRandom() }}
+        </p>
+        <!-- 4) Search any image on Google and output it here by binding the "src" attribute -->
+        <div>
+            <img v-bind:src="unsplash" style="width:100px;height:100px">
+        </div>
+        <!-- 5) Pre-Populate this input with your name (set the "value" attribute) -->
+        <div>
+            <input type="text">
+        </div>
+        
+    </div>
+
+    <script>
+        new Vue ({
+            el: "#exercise",
+            data: {
+                YOUR_NAME : 'Ibrahim Abdul Majid',
+                AGE : '21',
+                unsplash: 'https://images.unsplash.com/photo-1528642474498-1af0c17fd8c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60'
+            },
+            methods : {
+                multiply: function() {
+                    return parseInt(this.AGE) * 3
+                },
+                mathRandom: function() {
+                    return Math.random()
+                }
+            }
+
+        })
+    </script>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                title : "Hello World",
+                link : 'https://google.com',
+                finishedLink : '<a href="https://google.com"> Google </a>'
+            },
+            methods : {
+                changeTitle: function(event) {
+                    this.title = event.target.value;
+                },
+                sayHello: function() {
+                    this.title = "Hello!";
+                    return this.title;
+                }
+            }
+
+        })
+    </script>
+    
+</body>
+</html>
