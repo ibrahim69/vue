@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Filters & Mixins</h1>
         <input type="text" name="" v-model="filterText" >
         <ul>
@@ -11,20 +11,10 @@
 </template>
 
 <script>
+    import {fruitMixins} from '../fruitMixins'
+
     export default {
-        data() {
-            return {
-                fruits: ['Apple', 'Mango', 'Banana', 'Melon', 'Guava'],
-                filterText: ''
-            }
-        },
-        computed: {
-            filteredFruits() {
-                return this.fruits.filter((element) => {
-                    return element.match(this.filterText);
-                })
-            }
-        }
+        mixins: [fruitMixins]
     }
 </script>
 
