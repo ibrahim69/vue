@@ -1,0 +1,21 @@
+<template>
+    <div>
+        <app-stock v-for="stock in stocks" :key="stock.id" :stock="stock"></app-stock>
+    </div>
+</template>
+
+<script>
+    import Stock from './Stock';
+    import * as type from '../../store/types';
+    
+    export default {
+        components: {
+            appStock: Stock
+        },
+        computed: {
+            stocks() {
+                return this.$store.getters[type.STOCKS];
+            }
+        }
+    }
+</script>
